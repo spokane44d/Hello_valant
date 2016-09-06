@@ -26,12 +26,12 @@ namespace ValantDateString
         static void Main(string[] args)
         {
             Console.Clear();
-            string path = null;
-            while(true) {
+            string path = null;                                        
+            while(true) {                                               //loop for file to process or exit
                 Console.WriteLine("\nValantDateString - Enter path and file name or press <enter> to exit: ");
                 path = Console.ReadLine();
                 if (path.Length == 0)
-                    Environment.Exit((int)ExitCode.ProgramTerminated);                    //Program terminated by operator
+                    Environment.Exit((int)ExitCode.ProgramTerminated);     //Program terminated by operator
                 if (File.Exists(path))
                 { 
                     break;                                  //We found the file, let's go read it 
@@ -45,7 +45,7 @@ namespace ValantDateString
             //read the complete text file into a string array
             string[] inputDates = File.ReadAllLines(path, Encoding.UTF8);
 
-            if (inputDates.Length == 0)
+            if (inputDates.Length == 0)                                       // check to see if we have any input
                 Environment.Exit((int)ExitCode.EmptyFile);                    //Empty Input File - Exit
 
             //create a list for all lines of the input date text file
@@ -82,7 +82,7 @@ namespace ValantDateString
             }
             else
             {
-                if (!DateTime.TryParse(DateFormatter(inputDate), out dateTime))
+                if (!DateTime.TryParse(DateFormatter(inputDate), out dateTime))   //Make sure that it's a valid date.
                 {
                     Console.WriteLine("  Invalid date-" + inputDate);
                 }
@@ -105,7 +105,7 @@ namespace ValantDateString
             return inputDate.Substring(0, 2) + "/" + inputDate.Substring(2, 2) + "/" + inputDate.Substring(4, 4);
         }
 
-        static Boolean TodaysDateCheck(DateTime dateTime, DateTime startdate)
+        static Boolean TodaysDateCheck(DateTime dateTime, DateTime startdate)  //startdate is the time the app was started, not the current time
         {
             Boolean returnVal = false;
             if (DateTime.Compare(dateTime, startdate) < 0)
